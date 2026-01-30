@@ -29,7 +29,12 @@ window.addEventListener("message", async(event) => {
 // Fetch the summary from the node server. The node server access the gemini API and returns the results
 async function getSummary(text) {
   try {
-    const res = await fetch("http://localhost:8000/summary", {
+    const backendUrl = window.location.hostname.includes("localhost")
+      ? "http://localhost:8000/summary"
+      : "https://rag-pdfreader.onrender.com/summary";  
+    console.log(`Backendurl1:${backendUrl}`)
+      
+    const res = await fetch(backendUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text })

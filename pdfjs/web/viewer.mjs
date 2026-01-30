@@ -17985,12 +17985,16 @@ initCom(PDFViewerApplication);
     });
 
     // filepicker(encodeURIComponent(file.name)) 
+    const backendUrl = window.location.hostname.includes("localhost")
+      ? "http://localhost:8000/upload"
+      : "https://rag-pdfreader.onrender.com/upload";  
+    console.log(`Backendurl:${backendUrl}`)
 
     const formData = new FormData();
     formData.append("file", file);
 
     try {
-      const response = await fetch("http://localhost:8000/upload", {
+      const response = await fetch(backendUrl, {
         method: "POST",
         body: formData
       });
