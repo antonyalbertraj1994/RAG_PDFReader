@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PDF Reader</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .container1 {
+      margin:50px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px; /* space between textbox and button */
+      display: block; /* ensures the button is below */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #viewer-container {
+      flex: 7;
+      border-right: 2px solid #ccc;
+    }
+
+    #side-panel {
+      flex: 3;
+      padding: 20px;
+      background: #f9f9f9;
+      overflow-y: auto;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- LEFT: PDF.js Viewer -->
+  <div id="viewer-container">
+    <iframe
+      id="pdf-viewer"
+      src="/pdfjs/web/viewer.html?file=compressed.tracemonkey-pldi-09.pdf">
+    </iframe>
+  </div>
+
+  <!-- RIGHT: Side Panel -->
+  <div id="side-panel">
+    <div id="selection-output" style="margin-bottom: 30px">
+      <p class="placeholder">Select text in the PDF to see it here…</p>
+    </div>
+
+    <div class="container1">
+      <!-- Textbox -->
+      <input type="text" id="myTextbox" placeholder="Enter some text">
+      <button id="submitBtn">Submit</button>
+    </div>
+
+    <div id="ai-output">
+      <p class="placeholder">Generating Summary</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script type="module" src="/pdfjs/web/script.js"></script>
+
+<!-- <script type="module" src="genai.js"></script> -->
+
+<!-- <script src="viewer-selection.js"></script> -->
+
+</body>
+</html>
