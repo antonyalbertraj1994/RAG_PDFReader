@@ -2,7 +2,7 @@ const output = document.getElementById("selection-output");
 const gen_output = document.getElementById("ai-output");
 
 
-console.log("✅ script.js LOADED");
+console.log("✅ script.js LOADED1");
 
 const button = document.getElementById("submitBtn");
 button.addEventListener("click", handleSubmit);
@@ -49,41 +49,3 @@ async function getSummary(text) {
 }
 
 
-
-//getSummary("How are u doing? What is ur name ")
-
-
-// // const GEMINI_API_KEY = "AIzaSyDkBTe0sxNx7-ngrwBN7ugf3RNxyw8C2wg";
-
-// // // Example Gemini call
-// // async function summarizeText(text) {
-// //   const response = await fetch(
-// //     "https://gemini.googleapis.com/v1alpha2/models/text-bison-001:generate",
-// //     {
-// //       method: "POST",
-// //       headers: {
-// //         "Content-Type": "application/json",
-// //         "Authorization": "Bearer AIzaSyDkBTe0sxNx7-ngrwBN7ugf3RNxyw8C2wg" // <-- Put your Gemini API key here
-// //       },
-// //       body: JSON.stringify({
-// //         prompt: `Summarize the following text in 2-3 sentences:\n\n${text}`,
-// //         temperature: 0.5,
-// //         maxOutputTokens: 200
-// //       })
-// //     }
-// //   );
-
-// //   const data = await response.json();
-
-// //   const summary = data?.candidates?.[0]?.content || "No summary received";
-// //   console.log("Summary:", summary);
-// //   return summary;
-// // }
-
-
-
-
-
-
-
-// script.js
