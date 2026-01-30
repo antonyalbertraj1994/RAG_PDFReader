@@ -21,11 +21,11 @@ from fastapi.responses import FileResponse
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-API_KEY = "AIzaSyABRd5WThvs1f0FXuqXIAahbxMDknau6HY"
-client = genai.Client(api_key=API_KEY)
-
-if not API_KEY:
-    raise RuntimeError("GOOGLE_API_KEY not found in environment")
+# API_KEY = "AIzaSyABRd5WThvs1f0FXuqXIAahbxMDknau6HY"
+# client = genai.Client(api_key=API_KEY)
+# 
+# if not API_KEY:
+#     raise RuntimeError("GOOGLE_API_KEY not found in environment")
 
 # Configure Gemini
 # response = client.models.generate_content(
