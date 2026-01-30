@@ -18,8 +18,8 @@ from fastapi.responses import FileResponse
 
 # Load environment variables
 #load_dotenv()
-UPLOAD_FOLDER = "uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+UPLOAD_FOLDER = "pdfjs"
+#os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 

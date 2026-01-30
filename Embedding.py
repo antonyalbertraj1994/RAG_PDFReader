@@ -33,7 +33,7 @@ embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
 vector_store = InMemoryVectorStore(embeddings)
 
 def setupVectorStore():
-    docs = ReadPDF.ReadPDF('uploads/input.pdf')
+    docs = ReadPDF.ReadPDF('pdfjs/input.pdf')
     splits = ReadPDF.TextSplitter(docs)
     ids = vector_store.add_documents(documents=splits)
     print("-------------------Vector Database-------------------")
