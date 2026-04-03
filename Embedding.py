@@ -4,7 +4,6 @@ import time
 
 import torch
 from langchain_community.chat_models import ChatHuggingFace
-from langchain_openai import ChatOpenAI
 from langchain_huggingface import HuggingFaceEmbeddings
 
 from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
@@ -21,16 +20,7 @@ from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chat_models import init_chat_model
 from langchain_aws import BedrockEmbeddings, ChatBedrock, AmazonKnowledgeBasesRetriever
-from openai import OpenAI
 
-
-
-
-client = ChatOpenAI(
-    model_name="openai/gpt-oss-20b:groq",
-    openai_api_key=os.environ["HF_TOKEN"],  # your HF token
-    base_url="https://router.huggingface.co/v1"
-)
 
 google_model = ChatGoogleGenerativeAI(model="gemini-3-flash-preview")
 #aws_model = ChatBedrock(model="anthropic.claude-3-5-sonnet-20240620-v1:0")
