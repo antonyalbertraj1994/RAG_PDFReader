@@ -2,11 +2,7 @@ import getpass
 import os
 import time
 
-import torch
-from langchain_community.chat_models import ChatHuggingFace
-from langchain_huggingface import HuggingFaceEmbeddings
 
-from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 
 import ReadPDF
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -36,7 +32,6 @@ if not os.environ.get("GOOGLE_API_KEY"):
 
 
 model_gemma = "google/embeddinggemma-300m"
-#embeddinggemma = HuggingFaceEmbeddings(model_name = model_gemma,model_kwargs={})
 
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 #embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
