@@ -1,0 +1,5 @@
+1) Install all the required python libraries like langchain, PyMuPDF
+2) Then using parse the PDF using the PYmupdf. It returns all the
+3) Then, document needs to split into small chunks. This is required to convert them and store them in a vector database. We use the recursive splitter to split the document pdf into chunks
+4) Then, we convert them into embedding using the amazon embed model
+5) Then, we store the converted embedding into a vector database.

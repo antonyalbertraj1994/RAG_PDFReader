@@ -60,6 +60,7 @@ from fastapi import UploadFile, File
 
 @app.post("/upload-pdf")
 async def upload_pdf(pdf: UploadFile = File(...)):
+    print("---------------------New PDF updated----------------")
     content = await pdf.read()
     with open(f"uploaded_{pdf.filename}", "wb") as f:
         f.write(content)
@@ -121,6 +122,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     # Build a safe file path
     file_path = os.path.join(UPLOAD_FOLDER, "input.pdf")
+    print("---------------------New PDF updated----------------")
 
     # Read file contents and save to disk
     with open(file_path, "wb") as f:

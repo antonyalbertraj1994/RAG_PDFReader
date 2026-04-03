@@ -2,6 +2,13 @@ import getpass
 import os
 import time
 
+import torch
+from langchain_community.chat_models import ChatHuggingFace
+from langchain_openai import ChatOpenAI
+from langchain_huggingface import HuggingFaceEmbeddings
+
+from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
+
 import ReadPDF
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
@@ -13,11 +20,21 @@ from langchain_core.runnables import chain
 from langchain.agents import create_agent
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chat_models import init_chat_model
-from langchain_aws import BedrockEmbeddings, ChatBedrock
+from langchain_aws import BedrockEmbeddings, ChatBedrock, AmazonKnowledgeBasesRetriever
+from openai import OpenAI
 
-google_model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
-model = ChatBedrock(model="anthropic.claude-3-5-sonnet-20240620-v1:0")
 
+
+
+client = ChatOpenAI(
+    model_name="openai/gpt-oss-20b:groq",
+    openai_api_key=os.environ["HF_TOKEN"],  # your HF token
+    base_url="https://router.huggingface.co/v1"
+)
+
+google_model = ChatGoogleGenerativeAI(model="gemini-3-flash-preview")
+#aws_model = ChatBedrock(model="anthropic.claude-3-5-sonnet-20240620-v1:0")
+aws_model = ChatBedrock(model="anthropic.claude-3-sonnet-20240229-v1:0")
 
 # if not os.environ.get("OPENAI_API_KEY"):
 #     print("OpenAI API key not set")
@@ -28,8 +45,12 @@ if not os.environ.get("GOOGLE_API_KEY"):
     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter API key for Google Gemini: ")
 
 
+model_gemma = "google/embeddinggemma-300m"
+#embeddinggemma = HuggingFaceEmbeddings(model_name = model_gemma,model_kwargs={})
 
-embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+#embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0")
+
 vector_store = InMemoryVectorStore(embeddings)
 
 def setupVectorStore():
@@ -65,6 +86,7 @@ def search(querystring) :
     )
     print("Query String", query)
     final_result = ""
+    #agent.run({"messages": [{"role": "user", "content": query}]})
 
     for event in agent.stream(
         {"messages": [{"role": "user", "content": query}]},
@@ -72,12 +94,14 @@ def search(querystring) :
     ):
         final_result = event["messages"][-1].content
 
-    return final_result
+    return final_result[0]["text"] #pip install -U `langchain-openai
 
     # for event in agent.stream(
     #     {"messages": [{"role": "user", "content": query}]},
     #     stream_mode="values",
     #     event["messages"][-1].pretty_print()
 
+
+# setupVectorStore()
 # results = search("What is the power consumption of the LED matrix display?")
 # print(f"Result123:{results}")
